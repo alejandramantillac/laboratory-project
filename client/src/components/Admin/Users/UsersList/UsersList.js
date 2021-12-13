@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
-import { Switch, List, Avatar, Button, Icon } from 'antd';
+import { Switch, List, Avatar, Button, Icon, Modal as ModalAntd, notification } from 'antd';
 import NoAvatar from '../../../../assets/img/png/no-avatar.png';
+import Modal from '../../../Modal/Modal';
+import EditUserForm from '../EditUserForm';
 
 import './UsersList.scss';
 
 export default function UsersList(props) {
     const { usersActive, usersInactive } = props;
-    const  [viewUsersActives, setViewUsersActives]  = useState(true);
+    const [viewUsersActives, setViewUsersActives] = useState(true);
+    const [isVisibleModal, setIsVisibleModal] = useState(false);
+    const [modalTitle, setModalTitle] = useState("");
+    const [modalContent, setModalContent] = useState(null);
 
     return (
         <div className='list-users'>
@@ -20,13 +25,41 @@ export default function UsersList(props) {
                 </span>
             </div>
 
-            {viewUsersActives ? <UsersActive usersActive={usersActive}  /> : <UsersInactive usersInactive={usersInactive} />}
+            {viewUsersActives ? (
+            <UsersActive
+                usersActive={usersActive}
+                setIsVisibleModal={setIsVisibleModal}
+                setModalTitle={setModalTitle}
+                setModalContent={setModalContent}
+            />
+            ) : (
+                <UsersInactive usersInactive={usersInactive} />
+            )}
+
+            <Modal
+                title={modalTitle}
+                isVisible={isVisibleModal}
+                setIsVisible={setIsVisibleModal}
+            >
+                {modalContent}
+            </Modal>
         </div>
     );
 }
 
 function UsersActive(props) {
-    const { usersActive } = props;
+    const {
+        usersActive,
+        setIsVisibleModal,
+        setModalTitle,
+        setModalContent
+    } = props;
+
+    const editUser = user => {
+        setIsVisibleModal(true);
+        setModalTitle(`Editar ${user.fullname}`);    
+        setModalContent(<EditUserForm user={user} />);
+    };
 
     return (
         <List
@@ -38,7 +71,7 @@ function UsersActive(props) {
                     actions={[
                         <Button 
                         type='primary' 
-                        onClick = {() => console.log('Editar Usuario')}
+                        onClick = {() => editUser(user)}
                         >
                             <Icon type='edit' />
                         </Button>,
