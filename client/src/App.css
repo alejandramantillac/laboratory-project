@@ -1,0 +1,11 @@
+@import './css/index.css';
+
+.success {
+  border: 1px solid var(--success);
+  background-color: var(--background-success);
+}
+
+.error {
+    border: 1px solid var(--error);
+    background-color: var(--background-error);
+}
