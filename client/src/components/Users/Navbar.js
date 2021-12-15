@@ -28,7 +28,7 @@ export default function Navbar() {
                             <Link className = "nav-link  dropdown-toggle" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" to = {routes.login} >Ingresar</Link>
                             <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                             <li><Link className="dropdown-item" to = '/login'>Paciente</Link></li>
-                            <li><Link className="dropdown-item" to = '/'>Empleado</Link></li>
+                            <li><Link className="dropdown-item" to = '/internal/login'>Empleado</Link></li>
                             <li><Link className="dropdown-item" to = '/admin/login'>Administrador</Link></li>
                         </ul>
 

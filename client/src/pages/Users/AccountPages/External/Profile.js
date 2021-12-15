@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Card, Button } from 'react-bootstrap'
-import AccountOptions from "./components/parts/AccountOptions";
+import AccountOptions from "../components/parts/AccountOptions";
+import photo from '../../../../assets/img/svg/female_avatar.svg'
 
 export default function Profile() {
 
@@ -11,7 +12,7 @@ export default function Profile() {
             <Row className="mt-4">
                 <Col xs={12} className="text-center">
                     <img
-                    src="../../../../../"
+                    src={photo}
                     alt="profile"
                     style={{
                         width: '200px',

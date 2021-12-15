@@ -1,8 +1,10 @@
 import React from 'react';
 import { Layout, Tabs } from 'antd';
 import  { Redirect } from 'react-router-dom';
-import Logo from '../../../assets/img/png/logo.png'; 
-import LoginForm from '../../../components/Users/LoginForm/LoginForm';
+import Logo from '../../../../../assets/img/png/logo.png'; 
+import LoginForm from '../../../../../components/InternalUsers/LoginForm/LoginForm';
+
+import './SignIn.scss';
 
 
 export default function  SignIn() {

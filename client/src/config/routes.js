@@ -11,8 +11,20 @@ import AdminUsers from '../pages/Admin/Users';
 import Home from '../pages/Home';
 import Contact from '../pages/Contact';
 import AboutUs from '../pages/AboutUs';
-import UsersSignIn from '../pages/Users/SignIn';
-import Profile from '../pages/Users/AccountPages/Profile';
+import UsersSignIn from '../pages/Users/AccountPages/External/SignIn';
+
+// External Pages
+import Profile from '../pages/Users/AccountPages/External/Profile';
+import Agenda from '../pages/Users/AccountPages/External/ExternalUsersAgenda/ExternalUsersAgenda';
+import Result from '../pages/Users/AccountPages/External/ExternalUsersResult/ExternalUsersResult';
+import Notification from '../pages/Users/AccountPages/External/ExternalUsersNotification/ExternalUsersNotification';
+
+// Internal Pages
+import InternalSignIn from '../pages/Users/AccountPages/Internal/SignIn/SignIn';
+import InternalProfile from '../pages/Users/AccountPages/Internal/InternalProfile';
+import InternalAgenda from '../pages/Users/AccountPages/Internal/InternalUsersAgenda/InternalUsersAgenda';
+import InternalResult from '../pages/Users/AccountPages/Internal/InternalUsersResult/InternalUsersResult';
+import InternalExam from '../pages/Users/AccountPages/Internal/InternalUsersExam/InternalUsersExam';
 
 // Other
 import Error404 from '../pages/Error404';
@@ -64,6 +76,21 @@ const routes = [
                 exact: true,
             },
             {
+                path: '/agenda',
+                component: Agenda,
+                exact: true,
+            },
+            {
+                path: '/result',
+                component: Result,
+                exact: true,
+            },
+            {
+                path: '/notification',
+                component: Notification,
+                exact: true,
+            },
+            {
                 path: '/contact',
                 component: Contact,
                 exact: true,
@@ -73,6 +100,33 @@ const routes = [
                 component: AboutUs,
                 exact: true,
             },
+            // Internal 
+            {
+                path: '/internal/login',
+                component: InternalSignIn,
+                exact: true,
+            },
+            {
+                path: '/internal-profile',
+                component: InternalProfile,
+                exact: true,
+            },
+            {
+                path: '/internal-agenda',
+                component: InternalAgenda,
+                exact: true,
+            },
+            {
+                path: '/internal-exam',
+                component: InternalExam,
+                exact: true,
+            },
+            {
+                path: '/internal-result',
+                component: InternalResult,
+                exact: true,
+            },
+
             {
                 component: Error404,
             },

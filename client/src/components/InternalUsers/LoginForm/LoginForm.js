@@ -40,7 +40,7 @@ export default function LoginForm() {
                                             onChange={(e) => this.setState({contrasena: e.target.value})}
                                         />
                                     </Form.Group>
-                                    <Link to = '/profile'>
+                                    <Link to = '/internal-profile'>
                                     <Button variant="secondary" type="submit"
                                         // onClick = {() => login(userCredentials, location.state?.from )}
                                     >

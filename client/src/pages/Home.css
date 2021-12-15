@@ -17,6 +17,11 @@
 
 }
 
+.jumbotron h1 {
+    margin-top: 120px;
+    font-weight: bolder;
+}
+
 .footer {
     background-color: #212529;
     text-align: center;
