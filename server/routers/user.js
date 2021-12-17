@@ -19,7 +19,11 @@ api.put(
   );
 api.get("/get-avatar/:avatarName", UserController.getAvatar);
 api.put("/update-user/:id", [md_auth.ensureAuth], UserController.updateUser);
-
+api.put(
+  "/activate-user/:id",
+  [md_auth.ensureAuth],
+  UserController.activateUser
+);
 
 
 module.exports = api;
