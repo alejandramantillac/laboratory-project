@@ -1,31 +1,88 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Avatar, Form, Icon, Input, Select, Button, Row, Col } from 'antd';
+import { Avatar, Form, Icon, Input, Select, Button, Row, Col, notification } from 'antd';
 import { useDropzone } from 'react-dropzone';
 import NoAvatar from '../../../../assets/img/png/no-avatar.png';
+import { uploadAvatarApi, updateUserApi, getAvatarApi } from '../../../../api/user';
+import { getAccessTokenApi } from '../../../../api/auth';
 
 import './EditUserForm.scss';
 
 export default function EditUserForm(props) {
-    const { user } = props;
+    const { user, setIsVisibleModal, setReloadUsers } = props;
     const [avatar, setAvatar] = useState(null);
-    const [userData, setUserData] = useState({
+    const [userData, setUserData] = useState({});
+
+    useEffect(() => {
+      setUserData({
         fullname: user.fullname,
         email: user.email,
         role: user.role,
         avatar: user.avatar
-    });
+      });
+    }, [user])
+
+    useEffect(() => {
+      if(user.avatar) {
+        getAvatarApi(user.avatar).then(response => {
+          setAvatar(response);
+        });
+      } else {
+        setAvatar(null);
+      }
+    }, [user])
 
     useEffect(() => {
         if (avatar) {
-          setUserData({ ...userData, avatar });
+          setUserData({ ...userData, avatar: avatar.file });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [avatar]);
 
     const updateUser = e => {
         e.preventDefault();
-        console.log(userData);
-    };
+
+        const token = getAccessTokenApi();
+        const userUpdate = userData;
+    
+        if (userUpdate.password || userUpdate.repeatPassword) {
+          if (userUpdate.password !== userUpdate.repeatPassword) {
+            notification["error"]({
+              message: "Las contraseñas deben ser iguales."
+            });
+            return;
+          } else {
+            delete userUpdate.repeatPassword;
+          }
+        } 
+
+          if (!userUpdate.fullname|| !userUpdate.email) {
+            notification["error"]({
+              message: "El nombre y email son obligatorios."
+            });
+            return;
+          }
+
+          if (typeof userUpdate.avatar === "object") {
+            uploadAvatarApi(token, userUpdate.avatar, user._id).then(response => {
+              userUpdate.avatar = response.avatarName;
+              updateUserApi(token, userUpdate, user._id).then(result => {
+                notification["success"]({
+                  message: result.message
+                });
+                setIsVisibleModal(false);
+                setReloadUsers(true);
+              });
+            });
+          } else {
+            updateUserApi(token, userUpdate, user._id).then(result => {
+              notification["success"]({
+                message: result.message
+              });
+              setIsVisibleModal(false);
+              setReloadUsers(true);
+            });
+          }
+        };
 
     return (
         <div className='edit-user-form'>
@@ -40,32 +97,45 @@ export default function EditUserForm(props) {
 }
 
 function UploadAvatar(props) {
-    const { avatar, setAvatar } = props;
+  const { avatar, setAvatar } = props;
+  const [avatarUrl, setAvatarUrl] = useState(null);
 
-    const onDrop = useCallback(
-        acceptedFiles => {
-            const file = acceptedFiles[0];
-            setAvatar({ file, preview : URL.createObjectURL(file) });
-        },
-        [setAvatar]
-    );
+  useEffect(() => {
+    if (avatar) {
+      if (avatar.preview) {
+        setAvatarUrl(avatar.preview);
+      } else {
+        setAvatarUrl(avatar);
+      }
+    } else {
+      setAvatarUrl(null);
+    }
+  }, [avatar]);
 
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({ 
-        accept: 'image/jpg, image/jpeg, image/png',
-        noKeyboard: true,
-        onDrop
-     });
+  const onDrop = useCallback(
+    acceptedFiles => {
+      const file = acceptedFiles[0];
+      setAvatar({ file, preview: URL.createObjectURL(file) });
+    },
+    [setAvatar]
+  );
 
-     return (
-        <div className="upload-avatar" {...getRootProps()}>
-            <input {...getInputProps()} />
-            {isDragActive ? (
-                <Avatar size={150} src={NoAvatar} />
-            ) : (
-                <Avatar size={150} src={avatar ? avatar.preview : NoAvatar} />
-            )}
-        </div>
-     )
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    accept: "image/jpeg, image/png, image/jpg",
+    noKeyboard: true,
+    onDrop
+  });
+
+  return (
+    <div className="upload-avatar" {...getRootProps()}>
+      <input {...getInputProps()} />
+      {isDragActive ? (
+        <Avatar size={150} src={NoAvatar} />
+      ) : (
+        <Avatar size={150} src={avatarUrl ? avatarUrl : NoAvatar} />
+      )}
+    </div>
+  );
 }
 
 function EditForm(props) {
@@ -80,7 +150,7 @@ function EditForm(props) {
               <Input
                 prefix={<Icon type="user" />}
                 placeholder="Nombre Completo"
-                value={userData.fullname}
+                Value={userData.fullname}
                 onChange={e => setUserData({ ...userData, fullname: e.target.value })}
               />
             </Form.Item>
@@ -93,7 +163,7 @@ function EditForm(props) {
               <Input
                 prefix={<Icon type="mail" />}
                 placeholder="Correo electronico"
-                value={userData.email}
+                Value={userData.email}
                 onChange={e =>
                   setUserData({ ...userData, email: e.target.value })
                 }
@@ -103,13 +173,13 @@ function EditForm(props) {
           <Col span={12}>
             <Form.Item>
               <Select
-                placeholder="Seleccióna una rol"
+                placeholder="Selecciona un rol"
                 onChange={e => setUserData({ ...userData, role: e })}
-                value={userData.role}
+                Value={userData.role}
               >
                 <Option value="admin">Administrador</Option>
-                <Option value="editor">Paciente</Option>
-                <Option value="reviewr">Empleado</Option>
+                <Option value="external">Paciente</Option>
+                <Option value="internal">Empleado</Option>
               </Select>
             </Form.Item>
           </Col>
