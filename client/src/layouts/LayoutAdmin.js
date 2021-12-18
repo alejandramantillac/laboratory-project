@@ -34,8 +34,10 @@ export default function LayoutAdmin(props) {
                         />
                     </Header>
                     <Content className = 'layout_admin__content'>
-                    <h1>Content</h1>
-                    <h2>Content</h2>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
                         <LoadRoutes routes={routes} />
                     </Content>
                     <Footer className = 'layout-admin__footer'>Laboratorios Asinducom 2021</Footer>

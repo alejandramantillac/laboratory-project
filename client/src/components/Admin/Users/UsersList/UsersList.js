@@ -41,7 +41,7 @@ export default function UsersList(props) {
                         {viewUsersActives ? 'Usuarios Activos' : 'Usuarios Inactivos'}
                     </span>
                 </div>
-                <Button type='primary' onClick={addUserModal}>
+                <Button type='primary' className='mx-4' onClick={addUserModal}>
                     Crear Usuario
                 </Button>
             </div>

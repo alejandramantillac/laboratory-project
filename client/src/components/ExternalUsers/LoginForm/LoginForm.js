@@ -34,7 +34,7 @@ export default function LoginForm() {
           notification["success"]({
             message: "Login exitoso",
         });
-        window.location.href = "/admin";
+        window.location.href = "/external-profile";
         }
         
         console.log(result);

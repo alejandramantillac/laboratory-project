@@ -72,11 +72,6 @@ const routes = [
                 exact: true,
             },
             {
-                path: '/profile',
-                component: Profile,
-                exact: true,
-            },
-            {
                 path: '/agenda',
                 component: Agenda,
                 exact: true,
@@ -128,6 +123,11 @@ const routes = [
                 exact: true,
             },
             // External
+            {
+                path: '/external-profile',
+                component: Profile,
+                exact: true,
+            },
             {
                 path: '/external/login',
                 component: ExternalSignIn,
