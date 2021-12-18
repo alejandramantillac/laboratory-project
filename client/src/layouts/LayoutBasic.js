@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Layout } from 'antd';
 
-import Navbar from '../components/Users/Navbar';
+import Navbar from '../components/Navbar';
 
 export default function LayoutBasic(props) {
     const { routes } = props;

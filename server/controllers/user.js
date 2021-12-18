@@ -7,10 +7,10 @@ const User = require('../models/user');
 function signUp(req, res) {
     const user = new User()
 
-    const { fullname, email, password, repeatPassword } = req.body;
+    const { fullname, email, role, password, repeatPassword } = req.body;
     user.fullname = fullname;
     user.email = email.toLowerCase();
-    user.role = 'admin';
+    user.role = role;
     user.active = false;
 
     if(!password || !repeatPassword) {

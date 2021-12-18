@@ -105,9 +105,9 @@ function AddForm(props) {
               onChange={e => setUserData({ ...userData, role: e })}
               value={userData.role}
             >
-              <Option value="Administrador">Administrador</Option>
-              <Option value="Paciente">Paciente</Option>
-              <Option value="Empleado">Empleado</Option>
+              <Option value="admin">Administrador</Option>
+              <Option value="external">Paciente</Option>
+              <Option value="internal">Empleado</Option>
             </Select>
           </Form.Item>
         </Col>

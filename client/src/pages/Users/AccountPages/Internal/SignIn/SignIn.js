@@ -2,7 +2,8 @@ import React from 'react';
 import { Layout, Tabs } from 'antd';
 import  { Redirect } from 'react-router-dom';
 import Logo from '../../../../../assets/img/png/logo.png'; 
-import LoginForm from '../../../../../components/InternalUsers/LoginForm/LoginForm';
+import LoginForm from '../../../../../components/InternalUsers/LoginForm';
+import RegisterForm from '../../../../../components/InternalUsers/RegisterForm';
 
 import './SignIn.scss';
 
@@ -23,7 +24,7 @@ return (
                     <LoginForm />
                 </TabPane>
                 <TabPane tab={<span>Registrarse</span>} key="2">
-                    {/* <RegisterForm />  */}
+                    <RegisterForm /> 
                 </TabPane>
             </Tabs>
 

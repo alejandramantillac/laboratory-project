@@ -10,7 +10,7 @@ import './RegisterForm.scss';
 
 export default function RegisterForm() {
     const [inputs, setInputs] = useState({
-        role: 'admin',
+        role: 'internal',
         fullname : '',
         email: "",
         password: "",
@@ -99,7 +99,7 @@ export default function RegisterForm() {
         }
     
         setInputs({
-          role: 'admin',
+          role: 'internal',
           email: "",
           password: "",
           repeatPassword: "",

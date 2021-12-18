@@ -14,13 +14,14 @@ import AboutUs from '../pages/AboutUs';
 import UsersSignIn from '../pages/Users/AccountPages/External/SignIn';
 
 // External Pages
+import ExternalSignIn from '../pages/Users/AccountPages/External/SignIn';
 import Profile from '../pages/Users/AccountPages/External/Profile';
 import Agenda from '../pages/Users/AccountPages/External/ExternalUsersAgenda/ExternalUsersAgenda';
 import Result from '../pages/Users/AccountPages/External/ExternalUsersResult/ExternalUsersResult';
 import Notification from '../pages/Users/AccountPages/External/ExternalUsersNotification/ExternalUsersNotification';
 
 // Internal Pages
-import InternalSignIn from '../pages/Users/AccountPages/Internal/SignIn/SignIn';
+import InternalSignIn from '../pages/Users/AccountPages/Internal/SignIn';
 import InternalProfile from '../pages/Users/AccountPages/Internal/InternalProfile';
 import InternalAgenda from '../pages/Users/AccountPages/Internal/InternalUsersAgenda/InternalUsersAgenda';
 import InternalResult from '../pages/Users/AccountPages/Internal/InternalUsersResult/InternalUsersResult';
@@ -126,7 +127,14 @@ const routes = [
                 component: InternalResult,
                 exact: true,
             },
+            // External
+            {
+                path: '/external/login',
+                component: ExternalSignIn,
+                exact: true,
+            },
 
+            // Error 404
             {
                 component: Error404,
             },
