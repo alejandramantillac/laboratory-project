@@ -1,11 +1,16 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import routes from '../config/routes';
-import useAuth from '../auth/useAuth';
+import { logout } from '../api/auth';
 
 import './Navbar.css';
 
 export default function Navbar() {
+
+    const logoutUser = () => {
+        logout();
+        window.location.reload('/');
+    };
 
     // const { logout } = useAuth();   
 
@@ -41,7 +46,7 @@ export default function Navbar() {
                             <Link className = "nav-link" to = '/contact' >Contáctenos</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className = "button btn btn-danger" to = '/'  >Cerrar sesión</Link>
+                            <Link className = "button btn btn-danger" onClick={logoutUser} to='/' >Cerrar sesión</Link>
                         </li>
                     </ul>
                     </div>

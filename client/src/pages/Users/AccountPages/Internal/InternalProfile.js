@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button } from 'react-bootstrap'
 import AccountOptionsTwo from "../components/parts/AccountOptionsTwo";
 import photo from '../../../../assets/img/svg/male_avatar.svg'
 
 export default function Profile() {
-
 
     return (
         <>
@@ -25,17 +24,7 @@ export default function Profile() {
                 </Col>
                 <Col className = 'mt-4'>
                     <Card className='text-center mx-auto p-4' style = {{maxWidth: '360px'}}> 
-
-                        <Button variant="warning" className="mt-3">
-                            Editar Perfil
-                        </Button>
-                        <Button variant="link" className="mt-1" style = {{textDecoration: 'none'}}>
-                            Cambiar Contraseña
-                        </Button>
-                        <Button variant="link" className="mt-3 text-danger" style = {{textDecoration: 'none'}}
-                        >
-                            Eliminar Cuenta
-                        </Button>
+                    <p><b>Empleado</b></p>
                     </Card>
                 </Col>
             </Row>

@@ -25,17 +25,7 @@ export default function Profile() {
                 </Col>
                 <Col className = 'mt-4'>
                     <Card className='text-center mx-auto p-4' style = {{maxWidth: '360px'}}> 
-
-                        <Button variant="warning" className="mt-3">
-                            Editar Perfil
-                        </Button>
-                        <Button variant="link" className="mt-1" style = {{textDecoration: 'none'}}>
-                            Cambiar Contraseña
-                        </Button>
-                        <Button variant="link" className="mt-3 text-danger" style = {{textDecoration: 'none'}}
-                        >
-                            Eliminar Cuenta
-                        </Button>
+                    <p><b>Paciente</b></p>
                     </Card>
                 </Col>
             </Row>
