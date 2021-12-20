@@ -2,19 +2,19 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Table, Button, Container, Modal, ModalBody, ModalHeader, FormGroup, ModalFooter} from 'reactstrap';
 
-import './InternalCrudAgenda.css'
+import './InternalUsersAgenda.css'
 
 const data = [
-    { id: 1, paciente: 'Diego', fecha: '19/12/2021'},
-    { id: 2, paciente: 'Diana', fecha: '20/12/2021'},
-    { id: 3, paciente: 'Julián', fecha: '18/12/2021'},
-    { id: 4, paciente: 'Juan', fecha: '27/12/2021'},
-    { id: 5, paciente: 'Vanessa', fecha: '30/12/2021'},
-    { id: 6, paciente: 'Melissa', fecha: '23/12/2021'},
-    { id: 7, paciente: 'José', fecha: '25/12/2021'},
+    { id: 1, paciente: 'Diego', tipodeexamen: 'Hemograma', fecha: '19/12/2021'},
+    { id: 2, paciente: 'Diana', tipodeexamen: 'Tiroides', fecha: '20/12/2021'},
+    { id: 3, paciente: 'Julián', tipodeexamen: 'Uroanálisis', fecha: '18/12/2021'},
+    { id: 4, paciente: 'Juan', tipodeexamen: 'Glicemia', fecha: '27/12/2021'},
+    { id: 5, paciente: 'Vanessa', tipodeexamen: 'Colesterol Total', fecha: '30/12/2021'},
+    { id: 6, paciente: 'Melissa', tipodeexamen: 'COVID-19', fecha: '23/12/2021'},
+    { id: 7, paciente: 'José', tipodeexamen: 'Triglicéridos', fecha: '25/12/2021'},
 ]
 
-class InternalCrudAgenda extends React.Component {
+class InternalUsersAgenda extends React.Component {
     state = {
       data: data,
       modalActualizar: false,
@@ -22,6 +22,7 @@ class InternalCrudAgenda extends React.Component {
       form: {
         id: "",
         paciente: "",
+        tipodeexamen: "",
         fecha: "",
       },
     };
@@ -53,6 +54,7 @@ class InternalCrudAgenda extends React.Component {
       arreglo.map((registro) => {
         if (dato.id == registro.id) {
           arreglo[contador].paciente = dato.paciente;
+          arreglo[contador].tipodeexamen = dato.tipodeexamen;
           arreglo[contador].fecha = dato.fecha;
         }
         contador++;
@@ -61,7 +63,7 @@ class InternalCrudAgenda extends React.Component {
     };
   
     eliminar = (dato) => {
-      var opcion = window.confirm("Estás Seguro que deseas Eliminar el elemento "+dato.id);
+      var opcion = window.confirm("¿Confirmas que deseas eliminar el elemento "+dato.id+"?");
       if (opcion == true) {
         var contador = 0;
         var arreglo = this.state.data;
@@ -96,18 +98,22 @@ class InternalCrudAgenda extends React.Component {
       
       return (
         <>
+        <br />
+        <br />
+        <br />
           <Container>
           <br />
-            <Button color="success" onClick={()=>this.mostrarModalInsertar()}>Crear</Button>
+            <Button color="success" onClick={()=>this.mostrarModalInsertar()}>Agendar</Button>
             <br />
             <br />
             <Table>
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>paciente</th>
-                  <th>fecha</th>
-                  <th>Acción</th>
+                  <th>PACIENTE</th>
+                  <th>TIPO DE EXAMEN</th>
+                  <th>FECHA</th>
+                  <th>ACCIÓN</th>
                 </tr>
               </thead>
   
@@ -116,13 +122,14 @@ class InternalCrudAgenda extends React.Component {
                   <tr key={dato.id}>
                     <td>{dato.id}</td>
                     <td>{dato.paciente}</td>
+                    <td>{dato.tipodeexamen}</td>
                     <td>{dato.fecha}</td>
                     <td>
                       <Button
                         color="primary"
                         onClick={() => this.mostrarModalActualizar(dato)}
                       >
-                        Editar
+                        Modificar
                       </Button>{" "}
                       <Button color="danger" onClick={()=> this.eliminar(dato)}>Eliminar</Button>
                     </td>
@@ -134,7 +141,7 @@ class InternalCrudAgenda extends React.Component {
   
           <Modal isOpen={this.state.modalActualizar}>
             <ModalHeader>
-             <div><h3>Editar Registro</h3></div>
+             <div><h3>Modificar Registro</h3></div>
             </ModalHeader>
   
             <ModalBody>
@@ -163,6 +170,19 @@ class InternalCrudAgenda extends React.Component {
                   value={this.state.form.paciente}
                 />
               </FormGroup>
+
+              <FormGroup>
+                <label>
+                  tipo de examen: 
+                </label>
+                <input
+                  className="form-control"
+                  name="tipodeeexamen"
+                  type="text"
+                  onChange={this.handleChange}
+                  value={this.state.form.tipodeexamen}
+                />
+              </FormGroup>
               
               <FormGroup>
                 <label>
@@ -183,7 +203,7 @@ class InternalCrudAgenda extends React.Component {
                 color="primary"
                 onClick={() => this.editar(this.state.form)}
               >
-                Editar
+                Modificar
               </Button>
               <Button
                 color="danger"
@@ -193,8 +213,6 @@ class InternalCrudAgenda extends React.Component {
               </Button>
             </ModalFooter>
           </Modal>
-  
-  
   
           <Modal isOpen={this.state.modalInsertar}>
             <ModalHeader>
@@ -222,6 +240,18 @@ class InternalCrudAgenda extends React.Component {
                 <input
                   className="form-control"
                   name="paciente"
+                  type="text"
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+
+              <FormGroup>
+                <label>
+                  tipo de examen: 
+                </label>
+                <input
+                  className="form-control"
+                  name="tipodeeexamen"
                   type="text"
                   onChange={this.handleChange}
                 />
@@ -260,4 +290,4 @@ class InternalCrudAgenda extends React.Component {
     }
   }
 
-  export default InternalCrudAgenda;
+  export default InternalUsersAgenda;

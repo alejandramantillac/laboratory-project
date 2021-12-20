@@ -1,0 +1,21 @@
+@import "../../../../../scss/index.scss";
+
+.blog {
+  &__add-agenda {
+    text-align: right;
+    margin-bottom: 20px;
+  }
+}
+
+.agendas-list {
+  margin-left: 100px;
+}
+
+.ant-list-item-action {
+  margin-right: 100px;
+}
+
+.blog__add-agenda {
+  margin-top: 50px;
+  text-align: center;
+}

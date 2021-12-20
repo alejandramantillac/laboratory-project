@@ -9,7 +9,7 @@ export default function Navbar() {
 
     const logoutUser = () => {
         logout();
-        window.location.reload('/');
+        window.location.reload();
     };
 
     // const { logout } = useAuth();   
